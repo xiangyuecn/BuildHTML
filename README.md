@@ -1,7 +1,7 @@
 # BuildHTML用于前端HTML模板解析
 
 这段代码是以前在多个项目中使用的（包括PC端、移动端、还有Android、IOS Hybrid App），代码简单轻巧，但功能一点都不简单。100行代码不到，Uglify压缩后1k大小（可选移除_eval后0.8k）。
-演示地址：(https://xiangyuecn.github.io/BuildHTML/test.html)[https://xiangyuecn.github.io/BuildHTML/test.html]
+演示地址：[https://xiangyuecn.github.io/BuildHTML/test.html]()
 
 
 # 使用方法
