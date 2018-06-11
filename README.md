@@ -117,6 +117,9 @@ list:对象数组。
 
 check:fn(item,index)，检查函数，item为当前遍历到的对象，index为item在list中的索引，返回false可以停止遍历。
 
+### BuildHTMLArray.index
+当前遍历的索引。
+
 
 
 # 完整功能演示
