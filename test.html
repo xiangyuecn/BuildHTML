@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<title>BuildHTML测试</title>
+<script src="buildhtml.js"></script>
+
+</head>
+
+<body>
+<script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+
+<h1>简单使用</h1>
+<textarea class="t1" style="width:80%;height:300px">
+<script type="text/template" class="tp_action">
+<div>
+	{name}第一次使用模板，请多多指教。({:slogan}){{::o.html}}
+</div>
+</script>
+
+<script>
+var tp_action=$(".tp_action").html();
+
+var data={name:"豆豆",slogan:"<span style='color:green;font-size:12px'>面向大海春暖花开</span>"};
+var html=BuildHTML(tp_action,data);
+
+data.html="{fn:'次序:'+(BuildHTMLArray.index+1)}";
+var list=[data,data,data];
+html+=BuildHTMLArray(tp_action,list);
+
+$(".res1").append(html);
+</script>
+
+<div class="res1"></div>
+</textarea>
+
+<div><input type="button" onclick="test1()" value="执行"></div>
+<div>结果：</div>
+<div class="d1"></div>
+<script>
+function test1(){
+	$(".d1").html($(".t1").val());
+};
+test1();
+</script>
+
+
+<h1>完整功能演示</h1>
+<textarea class="t2" style="width:80%;height:300px">
+var tp=[
+
+ '<div txt="{txt}" style="display:{disable?"none":"假装空白"}">'
+,'	表达式文本:{txt}'
+,'	表达式html:{:txt}'
+,'	表达式html:{:txt.replace(/div/g,"p")}'
+,'	函数返回纯文本:{fn:var d="加"+o.html;Date.now()+d}'
+,'	函数返回html:{fn::o.html}'
+,'	函数+内置模板(嵌套):{fn::BuildHTML(o._tp_,o)}'
+,'	函数+内置模板+列表(嵌套循环):'
+,'	{fn::BuildHTMLArray(o._tp_,o.childs)}'
+,'</div>'
+
+,'定义内置模板(无返回值):{{_tp_='
+,'	<div>'
+,'		<span>{name}</span>'
+,'	</div>'
+,'}}'
+
+,'执行代码返回文本:{{:o.name'
+,'	+"<p>"'
+,'}}'
+
+,'执行代码返回html:{{::var p="<p>";'
+,'	o.name+p'
+,'}}'
+
+,'执行代码返回文本:{{:'
+,'	var c=0;'
+,'	for(var i=0;i<1000;i++){'
+,'		if(i%3)c++;'
+,'	};'
+,'	c'
+,'}}！哈'
+
+].join('\n');
+
+BuildHTML(tp,{
+	disable:false
+	,txt:"内容<div>"
+	,html:'<i>html</i>'
+	
+	,name:"小视频<i>"
+	,childs:[{name:"土豆<i>"},{name:"爱奇艺"}]
+});
+</textarea>
+
+<div><input type="button" onclick="test2()" value="执行"></div>
+<div>结果：</div>
+<textarea class="d2" style="width:80%;height:300px"></textarea>
+<script>
+function test2(){
+	var val;
+	try{
+		val=eval($(".t2").val());
+	}catch(e){
+		val="代码异常:"+e.stack;
+	};
+	$(".d2").val(val);
+};
+test2();
+</script>
+</body>
+</html>
