@@ -1,3 +1,4 @@
+"use strict";
 /**
 https://github.com/xiangyuecn/BuildHTML
 2018-06-11
@@ -63,7 +64,7 @@ function FormatText(str){
 
 /**可以把以下代码完全移除减少代码体积，把上面引用_eval(x)()的代码改成eval(x)即可，结果：损失了eval解析缓存，仅仅影响列表性质的模板解析速度**/
 //将有返回值eval代码解析成函数。eval对于一个相同模板重复解析太慢，缓存解析结果后列表性能大幅提升（把整个模板转换成函数比这个快不了多少，没必要为了这一点点性能多写几百行代码），对解析一次（深度优化无多大意义，包括把模板转换成函数）的模板基本无影响
-_eval=function(code){
+var _eval=function(code){
 	var fn=_evalCache[code];
 	if(!fn){
 		var fnCode=code.replace(/(\s*;)*\s*$/,"");
