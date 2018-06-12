@@ -110,6 +110,9 @@ obj:数据对象。
 
 返回值:html结果。
 
+### BuildHTML.CacheE
+eval缓存，可设置一个空对象清除缓存，方便测试用。
+
 ### BuildHTMLArray(tp,list,check)
 tp:html模板字符串。
 
@@ -119,6 +122,9 @@ check:fn(item,index)，检查函数，item为当前遍历到的对象，index为
 
 ### BuildHTMLArray.index
 当前遍历的索引。
+
+### BuildHTMLArray.list
+当前遍历的数组引用。
 
 
 

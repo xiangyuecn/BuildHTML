@@ -86,7 +86,7 @@ var tp=[
 
 ].join('\n');
 
-BuildHTML(tp,{
+return BuildHTML(tp,{
 	disable:false
 	,txt:"内容<div>"
 	,html:'<i>html</i>'
@@ -96,14 +96,26 @@ BuildHTML(tp,{
 });
 </textarea>
 
-<div><input type="button" onclick="test2()" value="执行"></div>
-<div>结果：</div>
+<div>
+	<input type="button" onclick="test2()" value="执行">
+	loop:<input type="text" class="t2loop" value="1000">
+	cache:<input type="checkbox" class="t2cache">
+</div>
+<div>结果：<span class="d2loop"></span></div>
 <textarea class="d2" style="width:80%;height:300px"></textarea>
 <script>
 function test2(){
-	var val;
+	var val,loop=+$(".t2loop").val()||1,cache=$(".t2cache")[0].checked;
 	try{
-		val=eval($(".t2").val());
+		var fn=Function($(".t2").val());
+		var t1=Date.now();
+		for(var i=0;i<loop;i++){
+			if(!cache){
+				BuildHTML.CacheE={};
+			};
+			val=fn();
+		};
+		$(".d2loop").html(Date.now()-t1+"ms");
 	}catch(e){
 		val="代码异常:"+e.stack;
 	};
