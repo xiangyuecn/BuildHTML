@@ -16,19 +16,37 @@
 <textarea class="t1" style="width:80%;height:300px">
 <script type="text/template" class="tp_action">
 <div>
-	{name}第一次使用模板，请多多指教。({:slogan}){{::o.html}}
+	{name}第一次使用模板，请多多指教。{:html}
+	
+	{_tempVar="<div>临时变量</div>";''} {:_tempVar+1} {_tempVar+2}
+	
+	{{@@_tp=
+		<div class="aa">
+			<style>.aa{ color:red; }</style>
+			{fn:BuildHTMLArray.index}内部模板循环
+			{{:
+				var s=xxNum;
+				s+=654000;
+				o.name+s
+			}}
+		</div>
+	@@}}
+	
+	{fn::window.xxNum=321;BuildHTMLArray(o._tp,[o,o,o])}
 </div>
 </script>
 
 <script>
-var tp_action=$(".tp_action").html();
+var mytp=$(".tp_action").html();
 
-var data={name:"豆豆",slogan:"<span style='color:green;font-size:12px'>面向大海春暖花开</span>"};
-var html=BuildHTML(tp_action,data);
+var data={//假装有段数据
+	name:"豆豆<i>"
+	,html:"<span style='color:green'>面向大海春暖花开</span>"
+};
 
-data.html="{fn:'次序:'+(BuildHTMLArray.index+1)}";
-var list=[data,data,data];
-html+=BuildHTMLArray(tp_action,list);
+var html=BuildHTML(mytp,data);//解析
+
+console.log(html);
 
 $(".res1").append(html);
 </script>
@@ -47,44 +65,60 @@ test1();
 </script>
 
 
-<h1>完整功能演示</h1>
+<h1>性能测试</h1>
 <textarea class="t2" style="width:80%;height:300px">
-var tp=[
+var tp=`
+<div txt="{txt}" style="display:{disable?"none":"假装空白"}">
+	表达式文本:{txt}
+	表达式html:{:txt}
+	表达式html:{:txt.replace(/div/g,"p")}
+	函数返回纯文本:{fn:var d="加"+o.html;Date.now()+d}
+	函数返回html:{fn::o.html}
+	函数+内置模板(嵌套):{fn::BuildHTML(o._tp_,o)}
+	函数+内置模板+列表(嵌套循环):
+	{fn::BuildHTMLArray(o._tp_,o.childs)}
+</div>
 
- '<div txt="{txt}" style="display:{disable?"none":"假装空白"}">'
-,'	表达式文本:{txt}'
-,'	表达式html:{:txt}'
-,'	表达式html:{:txt.replace(/div/g,"p")}'
-,'	函数返回纯文本:{fn:var d="加"+o.html;Date.now()+d}'
-,'	函数返回html:{fn::o.html}'
-,'	函数+内置模板(嵌套):{fn::BuildHTML(o._tp_,o)}'
-,'	函数+内置模板+列表(嵌套循环):'
-,'	{fn::BuildHTMLArray(o._tp_,o.childs)}'
-,'</div>'
+定义内置模板(无返回值):{{_tp_=
+	<div>
+		<span>{name}</span>
+	</div>
+}}
 
-,'定义内置模板(无返回值):{{_tp_='
-,'	<div>'
-,'		<span>{name}</span>'
-,'	</div>'
-,'}}'
+复杂模板：{{@@_tp2_=
+	<div>
+		{{_tp3=
+		<div>
+			<style>
+				.ddd{
+					color:{:color};
+				}
+			</style>
+			<div class="ddd">{color}</div>
+		</div>
+		}}
+		
+		{{::BuildHTML(o._tp3,{color:"#fff"})}}
+	</div>
+@@}}
 
-,'执行代码返回文本:{{:o.name'
-,'	+"<p>"'
-,'}}'
+执行代码返回文本:{{:o.name
+	+"<p>"
+}}
 
-,'执行代码返回html:{{::var p="<p>";'
-,'	o.name+p'
-,'}}'
+执行代码返回html:{{::var p="<p>";
+	o.name+p+BuildHTML(o._tp2_,o)
+}}
 
-,'执行代码返回文本:{{:'
-,'	var c=0;'
-,'	for(var i=0;i<1000;i++){'
-,'		if(i%3)c++;'
-,'	};'
-,'	c'
-,'}}！哈'
+执行代码返回文本:{{:
+	var c=0;
+	for(var i=0;i<1000;i++){
+		if(i%3)c++;
+	};
+	c
+}}！哈
 
-].join('\n');
+`;
 
 return BuildHTML(tp,{
 	disable:false

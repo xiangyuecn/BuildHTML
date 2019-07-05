@@ -7,8 +7,10 @@ https://github.com/xiangyuecn/BuildHTML
 
 var BuildHTML=window.BuildHTML=function(html,o){
 	o||(o={});
-	//复杂解析 {{:return text}} {{::return unsafehtml}} {{o_key=stringVal ddd\nddd}}stringVal支持多行(代码时要求倒数第二行必须要带;)，支持特定三个转义$x$,$x{,$x} 对应$,{,}
-	html=(html==null?"":html+"").replace(/\{\{(?:(::?)|(\w+)=)((?:\S|\s)+?)\}\}/ig,function(a,b,c,code){
+	//复杂解析 {{:return text}} {{::return unsafehtml}} {{o_key=stringVal ddd\nddd}}stringVal支持多行(代码时要求倒数第二行必须要带;)
+	//支持特定三个转义$x$,$x{,$x} 对应$,{,}
+	//支持前后区域限定{{@@...@@}}、{{@abc@...@abc@}}，用于可能存在{}字符的场合
+	html=(html==null?"":html+"").replace(/\{\{(@\w*@)?(?:(::?)|(\w+)=)((?:\S|\s)+?)\1\}\}/g,function(x,a,b,c,code){
 		if(b){
 			try{
 				var v=_eval(code)(o);
@@ -23,8 +25,8 @@ var BuildHTML=window.BuildHTML=function(html,o){
 			return "";
 		};
 	});
-	//简单解析{o_key_text} {:o_key_unsafehtml} {fn:return text} {fn::return unsafehtml}
-	html=html.replace(/\{(fn:)?(:)?(.+?)\}/ig,function(a,b,c,code){
+	//简单解析，必须一行，并且开头不是空白 {o_key_text} {:o_key_unsafehtml} {fn:return text} {fn::return unsafehtml}
+	html=html.replace(/\{(fn:)?(:)?([^\s].*?)\}/g,function(a,b,c,code){
 			try{
 				var v=_eval(b?code:"o."+code)(o);
 				v=v===undefined?"":v+"";
