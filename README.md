@@ -111,7 +111,7 @@ HTML模板内通过嵌入特定格式的`js代码`来实现内容的自动生成
 
 - **{{::多行js代码;返回html}}** ：执行多行js代码，并原样返回输出的内容，因为不会进行HTML实体转义，可用于返回html。比如：`{{::var i="<div>";i}}`结果为`<div>`。注意：倒数第二句代码结尾需要带`;`（因为实现起来简单）。
 
-- **{{:多行js代码;返回纯文本}}** ：和`{{:}}`语法相同，只是返回结果会进行HTML实体转义，比如：`{{@@:var i="<div>";i@@}}`结果为`&#60;div&#62;`。
+- **{{:多行js代码;返回纯文本}}** ：和`{{::}}`语法相同，只是返回结果会进行HTML实体转义，比如：`{{@@:var i="<div>";i@@}}`结果为`&#60;div&#62;`。
 
 
 
@@ -153,9 +153,7 @@ BuildHTML用Uglify压缩后1k大小，如果你对列表使用无多少要求，
 
 应用截图:
 
-<img src=".assets/picker2.png" width="250px">
-<img src=".assets/picker3.png" width="250px">
-<img src=".assets/picker4.png" width="250px">
+<img src=".assets/picker2.png" width="250px"> <img src=".assets/picker3.png" width="250px"> <img src=".assets/picker4.png" width="250px">
 
 
 
