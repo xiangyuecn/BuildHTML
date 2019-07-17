@@ -143,17 +143,17 @@ BuildHTML用Uglify压缩后1k大小，如果你对列表使用无多少要求，
 
 欢迎扫码体验：
 
-[<img src=".assets/picker-qr.png" width="100px">](https://jiebian.life/start/test/app?picker=1) https://jiebian.life/start/test/app?picker=1
+[<img src="assets/picker-qr.png" width="100px">](https://jiebian.life/start/test/app?picker=1) https://jiebian.life/start/test/app?picker=1
 
 
 截段核心的界面源码(不开源)看看：
 
-<img src=".assets/picker1.png">
+<img src="assets/picker1.png">
 
 
 应用截图:
 
-<img src=".assets/picker2.png" width="250px"> <img src=".assets/picker3.png" width="250px"> <img src=".assets/picker4.png" width="250px">
+<img src="assets/picker2.png" width="250px"> <img src="assets/picker3.png" width="250px"> <img src="assets/picker4.png" width="250px">
 
 
 
@@ -162,4 +162,4 @@ BuildHTML用Uglify压缩后1k大小，如果你对列表使用无多少要求，
 
 你也可以选择使用支付宝或微信给我捐赠：
 
-![](https://github.com/xiangyuecn/Recorder/raw/master/.assets/donate-alipay.png)  ![](https://github.com/xiangyuecn/Recorder/raw/master/.assets/donate-weixin.png)
+![](https://github.com/xiangyuecn/Recorder/raw/master/assets/donate-alipay.png)  ![](https://github.com/xiangyuecn/Recorder/raw/master/assets/donate-weixin.png)
