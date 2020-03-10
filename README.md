@@ -121,7 +121,7 @@ HTML模板内通过嵌入特定格式的`js代码`来实现内容的自动生成
 
 名称|说明
 :-|:-
-**BuildHTML(tp,obj)** | `tp`:html模板字符串。`obj`:数据对象。
+**BuildHTML(tp,obj)** | `tp`:html模板字符串。`obj`:数据对象，obj.BuildHTML_DisableSimple为特殊属性值，设为true可阻止{}的解析，只会对{{}}进行解析，方便在出现大量{}内容时使用。
 **BuildHTML.CacheE** | eval缓存，可设置一个空对象清除缓存，方便测试用。
 **BuildHTMLArray(tp,list,check)** | `tp`:html模板字符串。`list`:对象数组。`check:fn(item,index)`：检查函数，`item`为当前遍历到的对象，`index`为item在list中的索引，返回false可以停止遍历。
 **BuildHTMLArray.index** | 当前遍历的索引。

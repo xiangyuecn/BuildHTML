@@ -25,6 +25,9 @@ var BuildHTML=window.BuildHTML=function(html,o){
 			return "";
 		};
 	});
+	if(o.BuildHTML_DisableSimple){
+		return html;
+	};
 	//简单解析，必须一行，并且开头不是空白 {o_key_text} {:o_key_unsafehtml} {fn:return text} {fn::return unsafehtml}
 	html=html.replace(/\{(fn:)?(:)?([^\s].*?)\}/g,function(a,b,c,code){
 			try{
