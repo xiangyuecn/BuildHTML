@@ -160,6 +160,6 @@ BuildHTML用Uglify压缩后1k大小，如果你对列表使用无多少要求，
 # :star:捐赠
 如果这个库有帮助到您，请 Star 一下。
 
-你也可以选择使用支付宝或微信给我捐赠：
+您也可以使用支付宝或微信打赏作者：
 
-![](https://github.com/xiangyuecn/Recorder/raw/master/assets/donate-alipay.png)  ![](https://github.com/xiangyuecn/Recorder/raw/master/assets/donate-weixin.png)
+![](https://gitee.com/xiangyuecn/Recorder/raw/master/assets/donate-alipay.png)  ![](https://gitee.com/xiangyuecn/Recorder/raw/master/assets/donate-weixin.png)
