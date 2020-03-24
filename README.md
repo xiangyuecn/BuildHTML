@@ -163,3 +163,4 @@ BuildHTML用Uglify压缩后1k大小，如果你对列表使用无多少要求，
 您也可以使用支付宝或微信打赏作者：
 
 ![](https://gitee.com/xiangyuecn/Recorder/raw/master/assets/donate-alipay.png)  ![](https://gitee.com/xiangyuecn/Recorder/raw/master/assets/donate-weixin.png)
+
